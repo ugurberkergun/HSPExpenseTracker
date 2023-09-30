@@ -10,8 +10,4 @@
     <ProjectReference Include="..\HSPExpenseTracker.Core\HSPExpenseTracker.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
 </Project>

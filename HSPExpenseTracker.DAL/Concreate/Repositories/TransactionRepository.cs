@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HSPExpenseTracker.DAL.Concreate.Repositories
 {
-    public class AccountRepository:GenericRepository<Account>,IAccountRepository
+    public class TransactionRepository : GenericRepository<Transaction>, ITransactionRepository
     {
-        public AccountRepository(AppDbContext appDbContext) : base(appDbContext)
+        public TransactionRepository(AppDbContext appDbContext) : base(appDbContext)
         {
 
         }

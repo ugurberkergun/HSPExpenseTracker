@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace HSPExpenseTracker.Entities.Models
 {
-    public class Account:BaseEntity,IEntity
+    public class Category : BaseEntity, IEntity
     {
-        public long UserId { get; set; }
-        public User User { get; set; }
-        public Guid AccountGuid { get; set; }
-        public string AccountName { get; set; }
-
+        public string Name { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

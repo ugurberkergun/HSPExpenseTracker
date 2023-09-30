@@ -1,4 +1,12 @@
+using AutoMapper;
+using HSPExpenseTracker.Business.Abstract;
+using HSPExpenseTracker.Business.Concreate;
+using HSPExpenseTracker.Business.Mapping;
+using HSPExpenseTracker.Core.DAL.UnitOfWork;
+using HSPExpenseTracker.DAL.Abstract;
 using HSPExpenseTracker.DAL.Concreate.DbContexts;
+using HSPExpenseTracker.DAL.Concreate.Repositories;
+using HSPExpenseTracker.DAL.Concreate.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -12,6 +20,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
