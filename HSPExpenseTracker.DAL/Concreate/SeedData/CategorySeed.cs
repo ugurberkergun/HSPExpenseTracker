@@ -14,9 +14,9 @@ namespace HSPExpenseTracker.DAL.Concreate.SeedData
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasData(
-                new Category { Id = 2, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Sağlık Harcaması", RecordDate = DateTime.UtcNow },
-                new Category { Id = 3, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Okul Masrafları", RecordDate = DateTime.UtcNow },
-                new Category { Id = 4, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Eğlence", RecordDate = DateTime.UtcNow }
+                new Category { Id = 1, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Sağlık Harcaması", RecordDate = DateTime.UtcNow },
+                new Category { Id = 2, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Okul Masrafları", RecordDate = DateTime.UtcNow },
+                new Category { Id = 3, IsDeleted = false, ModifiedDate = DateTime.UtcNow, Name = "Eğlence", RecordDate = DateTime.UtcNow }
                 );
         }
     }
