@@ -24,7 +24,7 @@ namespace HSPExpenseTracker.Api.Controllers
         }
         
         [HttpPost]
-        public IActionResult DeleteTransaction(TransactionDto transactionDto)
+        public IActionResult DeleteTransaction(DeleteTransactionDto transactionDto)
         {
             return ActionResultInstance(_transactionService.DeleteTransaction(transactionDto));
         }   

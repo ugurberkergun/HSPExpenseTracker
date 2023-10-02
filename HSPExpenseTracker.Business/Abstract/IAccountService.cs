@@ -13,5 +13,7 @@ namespace HSPExpenseTracker.Business.Abstract
         Task<ResponseModel<NoDataResponse>> CreateAccountAsync(CreateAccountDto accountDto);
         ResponseModel<NoDataResponse> DeleteAccount(AccountDto accountDto);
         ResponseModel<NoDataResponse> UpdateAccount(AccountDto accountDto);
+        ResponseModel<List<AccountDto>> GetAccountListForUser(long userId);
+        ResponseModel<AccountDetailDto> GetAccountDetail(Guid accountGuid);
     }
 }

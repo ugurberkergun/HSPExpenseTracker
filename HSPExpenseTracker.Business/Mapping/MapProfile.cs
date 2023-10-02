@@ -14,8 +14,11 @@ namespace HSPExpenseTracker.Business.Mapping
         public MapProfile()
         {
             CreateMap<Transaction, TransactionDto>().ReverseMap();
+            CreateMap<Transaction, UpdateTransactionDto>().ReverseMap();
             CreateMap<Account, AccountDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Account, CreateAccountDto > ().ReverseMap();
+            CreateMap<Account, AccountDetailDto>().ReverseMap();
         }
     }
 }

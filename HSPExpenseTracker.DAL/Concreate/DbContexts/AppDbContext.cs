@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HSPExpenseTracker.Entities.Models;
+using HSPExpenseTracker.Core.Entities;
 
 namespace HSPExpenseTracker.DAL.Concreate.DbContexts
 {
@@ -25,6 +26,7 @@ namespace HSPExpenseTracker.DAL.Concreate.DbContexts
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
 

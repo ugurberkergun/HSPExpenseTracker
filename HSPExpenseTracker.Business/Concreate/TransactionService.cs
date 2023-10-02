@@ -51,11 +51,11 @@ namespace HSPExpenseTracker.Business.Concreate
             
         }
 
-        public ResponseModel<NoDataResponse> DeleteTransaction(TransactionDto transactionDto)
+        public ResponseModel<NoDataResponse> DeleteTransaction(DeleteTransactionDto transactionDto)
         {
             try
             {
-                var transaction = _transactionRepository.GetFirstOrDefault(x => x.AccountGuid == transactionDto.AccountGuid && !x.IsDeleted);
+                var transaction = _transactionRepository.GetFirstOrDefault(x => x.AccountGuid == transactionDto.AccountGuid && x.Id == transactionDto.TransactionId && !x.IsDeleted);
                 if (transaction == null)
                 {
                     return new ResponseModel<NoDataResponse>() { HasError = true, Message = Messages.ErrorMesage };
@@ -77,15 +77,17 @@ namespace HSPExpenseTracker.Business.Concreate
         {
             try
             {
-                var transaction = _transactionRepository.GetFirstOrDefault( x => x.AccountGuid == transactionDto.AccountGuid && !x.IsDeleted);
+                var transaction = _transactionRepository.GetFirstOrDefault( x => x.AccountGuid == transactionDto.AccountGuid && x.Id == transactionDto.TransactionId && !x.IsDeleted);
                 if (transaction == null)
                 {
                     return new ResponseModel<NoDataResponse>() { HasError = true, Message = Messages.ErrorMesage };
                 }
                 else
                 {
-                    var updatedTransaction = _mapper.Map<Transaction>(transactionDto);
-                    _transactionRepository.Update(updatedTransaction);
+                    transaction.Amount = transactionDto.Amount;
+                    transaction.CategoryId = transactionDto.CategoryId;
+                    transaction.Date = transactionDto.Date;
+                    _transactionRepository.Update(transaction);
                     _unitOfWorkService.Commit();
                     return new ResponseModel<NoDataResponse>() { HasError = false, Message = Messages.SuccessfullyMesage };
                 }
@@ -97,7 +99,7 @@ namespace HSPExpenseTracker.Business.Concreate
             }
         }
 
-        public ResponseModel<List<TransactionDto>> GetTransactionList(Guid accountGuid)
+        public ResponseModel<List<TransactionDto>> GetTransactionList(Guid accountGuid,DateTime? startDate = null,DateTime? endDate = null)
         {
             try
             {
@@ -107,7 +109,15 @@ namespace HSPExpenseTracker.Business.Concreate
                 }
                 else
                 {
-                    var transactionList = _transactionRepository.GetList(x => !x.IsDeleted && x.AccountGuid == accountGuid).ToList();
+                    List<Transaction> transactionList = new List<Transaction>();
+                    if (startDate != null && endDate != null)
+                    {
+                        transactionList = _transactionRepository.GetList(x => !x.IsDeleted && x.AccountGuid == accountGuid && x.Date > startDate && x.Date < endDate).ToList();
+                    }
+                    else
+                    {
+                        transactionList = _transactionRepository.GetList(x => !x.IsDeleted && x.AccountGuid == accountGuid).ToList();
+                    }
                     List<TransactionDto> transactionDtos = new List<TransactionDto>();
                     foreach (var transaction in transactionList)
                     {
@@ -122,12 +132,6 @@ namespace HSPExpenseTracker.Business.Concreate
                 return new ResponseModel<List<TransactionDto>>() { HasError = true, Message = Messages.ErrorMesage };
                 throw;
             }
-        }
-        private double GetBalance(Guid accountGuid)
-        {
-            var transactionList = _transactionRepository.GetList(x => !x.IsDeleted && x.AccountGuid == accountGuid);
-            var balance = transactionList.Sum(x => x.Amount);
-            return balance;
         }
     }
 }
