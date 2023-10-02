@@ -8,6 +8,6 @@ Migration işleminin ardından otomatik olarak Categories tablosuna 3 adet kayı
 
 Sırasıyla User, User ile Account ve Account ile Transactionlar oluşturabilirsiniz.
 
-Kullanıcıya ait Accountları görebilmek için Account/GetAccountListForUser
-Accountlara ait Transaction işlemlerini ve detaylarını(bakiye vb.) bilgilerini görebilmek için <b>Account/GetAccountsTransactionsAndDetails</b>
+* Kullanıcıya ait Accountları görebilmek için <b>Account/GetAccountListForUser<b>
+* Accountlara ait Transaction işlemlerini ve detaylarını(bakiye vb.) bilgilerini görebilmek için <b>Account/GetAccountsTransactionsAndDetails</b>
 endpointlerini kullanabilirsiniz.
