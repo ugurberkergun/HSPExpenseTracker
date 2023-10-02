@@ -15,6 +15,7 @@ namespace HSPExpenseTracker.Business.Mapping
         {
             CreateMap<Transaction, TransactionDto>().ReverseMap();
             CreateMap<Account, AccountDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }
